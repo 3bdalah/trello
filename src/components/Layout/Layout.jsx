@@ -5,9 +5,11 @@ import Header from "../Header/Header";
 export default function Layout() {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <div className=" bg-stone-50">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
     </>
   );
 }
