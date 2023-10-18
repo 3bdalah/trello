@@ -54,7 +54,7 @@ export default function SideBar() {
           }
         >
           <button
-            className="bg-slate-100 w-12 rounded-sm h-10 absolute right-[-48px] top-5"
+            className="bg-slate-100 w-12 rounded-sm h-10 absolute right-[-48px] top-14"
             onClick={() => {
               setToggle((prevToggle) => !prevToggle);
             }}
