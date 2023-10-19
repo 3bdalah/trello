@@ -10,13 +10,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/js/all.min.js";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryCleint = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId="317861228219-rp05oc8tu4p8gc271dhijvjevdaquqd1.apps.googleusercontent.com">
       <TokenContextProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <QueryClientProvider client={queryCleint}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </QueryClientProvider>
       </TokenContextProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>
