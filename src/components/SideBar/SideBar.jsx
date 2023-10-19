@@ -1,48 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import links from "../../Utils/Consts";
 export default function SideBar() {
   const [toggle, setToggle] = useState(false);
-  const links = [
-    { to: "/", text: "home", icone: <i className="fa fa-home"></i> },
-    {
-      to: "/add-task",
-      text: "add-task",
-      icone: <i className="fa fa-plus"></i>,
-    },
-    {
-      to: "/notifications",
-      text: "notification",
-      icone: <i className="fa fa-bell"></i>,
-    },
-    {
-      to: "/dashboard",
-      text: "dashboard",
-      icone: <i className="fa fa-dashboard"></i>,
-    },
-    { to: "/profile", text: "profile", icone: <i className="fa fa-user"></i> },
-    {
-      to: "/my-tasks",
-      text: "My-Tasks",
-      icone: <i className="fas fa-check fa-solid"></i>,
-    },
-    {
-      to: "/employees",
-      text: "employees",
-      icone: <i className="fa fa-users"></i>,
-    },
-    {
-      to: "/setting",
-      text: "setting",
-      icone: <i className="fa fa-gear"></i>,
-    },
-    {
-      to: "/help",
-      text: "help",
-      icone: <i className="fa fa-question"></i>,
-    },
-  ];
 
   return (
     <>
@@ -87,6 +48,14 @@ export default function SideBar() {
                     <span className="notification  text-sm bg-red-200 text-red-900 absolute px-1   rounded-md  right-3 top-2 text-center ">
                       322
                     </span>
+                  ) : null}
+                  {link.text === "chats" ? (
+                    <span className="notification  text-sm bg-red-200 text-red-900 absolute px-1   rounded-md  right-3 top-2 text-center ">
+                      2
+                    </span>
+                  ) : null}
+                  {link.text.toLowerCase() === "setting" ? (
+                    <span className="notification  text-sm bg-green-600  absolute p-1   rounded-md  right-3 top-3 text-center "></span>
                   ) : null}
                 </NavLink>
               </li>
