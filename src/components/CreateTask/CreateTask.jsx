@@ -166,10 +166,7 @@ export default function CreateTask() {
           </label>
           <select
             name="assignedTo"
-            value={
-              formik.values.assignedTo ||
-              (employees.length > 0 ? employees[0]._id : "")
-            }
+            value={formik.values.assignedTo}
             onChange={formik.handleChange}
             className="w-full border-1 shadow-transparent rounded-md px-3 py-2 mb-4"
           >
