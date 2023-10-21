@@ -10,6 +10,8 @@ import EmployeeList from "./components/EmployeeList/EmployeeList";
 import TasksList from "./components/TasksList/TasksList";
 import NotFound from "./components/NotFound/NotFound";
 import CreateTask from "./components/CreateTask/CreateTask";
+import CreatedTasks from "./components/CreatedTasks/CreatedTasks";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
 function App() {
   const routes = createBrowserRouter([
@@ -20,8 +22,16 @@ function App() {
         { index: true, element: <Home /> },
         { path: "/register", element: <Register /> },
         { path: "/login", element: <Login /> },
-        { path: "/profile", element: <Profile /> },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+          ),
+        },
         { path: "/add-task", element: <CreateTask /> },
+        { path: "/created-tasks", element: <CreatedTasks /> },
         { path: "/employees", element: <EmployeeList /> },
         { path: "/tasks", element: <TasksList /> },
         { path: "*", element: <NotFound /> },
