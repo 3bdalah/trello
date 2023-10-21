@@ -28,7 +28,7 @@ export default function CreateTask() {
         {
           headers: {
             token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmZlZTZlNGQyMmVhYmNlYzUwNjJlNCIsImlhdCI6MTY5NzY0MTMzMn0.QZdbhYW4RBrvB-NrAPL5fdMzsFPNs3FDTHRIFeNck24",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNmMWFmODJiZTI0N2EwMzI5NDQzNiIsImlhdCI6MTY5NzkwMzE2Nn0.YCmU1HAIIEH-20ZMBVb90bgt8VOgPSD_ChjIjTjJ72M",
           },
         }
       );
@@ -44,7 +44,7 @@ export default function CreateTask() {
         {
           headers: {
             token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmZlZTZlNGQyMmVhYmNlYzUwNjJlNCIsImlhdCI6MTY5NzY0MTMzMn0.QZdbhYW4RBrvB-NrAPL5fdMzsFPNs3FDTHRIFeNck24",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNmMWFmODJiZTI0N2EwMzI5NDQzNiIsImlhdCI6MTY5NzkwMzE2Nn0.YCmU1HAIIEH-20ZMBVb90bgt8VOgPSD_ChjIjTjJ72M",
           },
         }
       );
@@ -166,13 +166,13 @@ export default function CreateTask() {
           </label>
           <select
             name="assignedTo"
-            value={
-              formik.values.assignedTo ||
-              (employees.length > 0 ? employees[0]._id : "")
-            }
+            value={formik.values.assignedTo}
             onChange={formik.handleChange}
             className="w-full border-1 shadow-transparent rounded-md px-3 py-2 mb-4"
           >
+            <option value="" disabled hidden>
+              Select User
+            </option>
             {employees.map((emp, index) => {
               return (
                 <option key={index} value={emp._id}>
