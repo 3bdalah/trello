@@ -4,7 +4,9 @@ import { useDrop } from "react-dnd";
 import { formatDate } from "../../Utils/Consts";
 import CardTask from "../CardTask/CardTask";
 import axios from "axios";
-function ColumnTask({ tasks, status }) {
+function ColumnTask({ tasks, status, updateTasks }) {
+  const filteredTasks = tasks.filter((task) => task.status === status);
+
   // eslint-disable-next-line no-unused-vars
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
@@ -32,6 +34,7 @@ function ColumnTask({ tasks, status }) {
         }
       );
       console.log("respone to update task ", data);
+      updateTasks(id, status);
     } catch (error) {
       console.log("error to update", error);
     }
@@ -100,9 +103,9 @@ function ColumnTask({ tasks, status }) {
           )}
         </div>
         <div
-          className={tasks.length > 4 ? "overflow-y-scroll  h-screen" : "h-fit"}
+          className={tasks.length > 3 ? "overflow-y-scroll  h-screen" : "h-fit"}
         >
-          {tasks.map((task) => {
+          {filteredTasks.map((task) => {
             const formattedDeadline = formatDate(task.deadline);
 
             return (
