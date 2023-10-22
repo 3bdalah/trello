@@ -3,12 +3,12 @@ import { useEffect, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TokenContext } from "./../../Context/UserContext";
 import toast, { Toaster } from "react-hot-toast";
 export default function Login() {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState(null);
   // const [token, setToken] = useState("");
@@ -16,14 +16,27 @@ export default function Login() {
   const notifySuccess = (message) => {
     toast.success(message);
   };
+  const notifyError = (message) => {
+    toast.error(message);
+  };
   const handleLogin = async (values) => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://trello-backend-tlg1.onrender.com/signup",
+        "https://trello-backend-tlg1.onrender.com/login",
         values
       );
       console.log(res);
+      if (res.data.message == "logged in successfully") {
+        notifySuccess("Success!")
+        setTimeout(()=>{
+          navigate("/profile")
+        },3000)
+      console.log(res);
+    } else if (res.data.message == "password not correct" || res.data.message == "User not found, You have to register first"){
+      notifyError("Invalid email or password!")
+      console.log("faild to login ", res)
+    }
     } catch (error) {
       console.log("error", error);
     }
@@ -45,8 +58,11 @@ export default function Login() {
       console.log("res google ", res.data.message);
 
       if (res.data.message === "logged in successfully") {
-        notifySuccess("success loged in");
+        notifySuccess("Logged in successfully!");
         setToken(res.data.token);
+        setTimeout(()=>{
+          navigate("/profile")
+        },3000)
       }
 
       localStorage.setItem("token", res.data.token);
@@ -59,15 +75,16 @@ export default function Login() {
 
     if (dataUser) {
       handleGoogleLogin();
-      // navigate("/");
     }
   }, [dataUser]);
 
   let validationSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string()
-      .matches(/^[A-Z][a-z-0-9]{3,8}$/, "Your Password Wrong")
-      .required("Password is required"),
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d).{6,}$/,
+        "Invalid password. Password must have at least one uppercase letter, one digit, and be at least 6 characters long."
+      )
   });
   let formik = useFormik({
     initialValues: {

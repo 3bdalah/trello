@@ -10,9 +10,9 @@ export default function Register() {
   const notifySuccess = (message) => {
     toast.success(message);
   };
-  // const notifyError = (message) => {
-  //   toast.error(message);
-  // };
+  const notifyError = (message) => {
+    toast.error(message);
+  };
 
 
   const submitRegister = async (values) => {
@@ -31,10 +31,11 @@ export default function Register() {
         },3000)
 
       } else{
-
+        notifyError("Failed to signup!")
         console.log(data)
       }
     } catch (error) {
+      notifyError("Failed to signup!")
       console.log(error);
 
     }
