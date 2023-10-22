@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import ColumnTask from "../ColumnTask/ColumnTask";
 import { DndProvider } from "react-dnd";
@@ -27,7 +27,13 @@ function CreatedTasks() {
       console.log("errors get all users", error);
     }
   };
-
+  const updateTasks = useCallback((id, newStatus) => {
+    setCreatedTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task._id === id ? { ...task, status: newStatus } : task
+      )
+    );
+  }, []);
   useEffect(() => {
     getAllCreatedTasks();
   }, []);
@@ -45,15 +51,31 @@ function CreatedTasks() {
     setDoing(doning);
     setDone(done);
     console.log(toDoTasks, doingTasks, doneTasks, status);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createdTasks]);
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <div className="flex items-start justify-center">
-          <ColumnTask tasks={toDoTasks} status={"toDo"} key={"todo"} />
-          <ColumnTask tasks={doingTasks} status={"doing"} key={"doing"} />
-          <ColumnTask tasks={doneTasks} status={"done"} key={"done"} />
+          <ColumnTask
+            tasks={toDoTasks}
+            status={"toDo"}
+            key={"todo"}
+            updateTasks={updateTasks}
+          />
+          <ColumnTask
+            tasks={doingTasks}
+            status={"doing"}
+            key={"doing"}
+            updateTasks={updateTasks}
+          />
+          <ColumnTask
+            tasks={doneTasks}
+            status={"done"}
+            key={"done"}
+            updateTasks={updateTasks}
+          />
           {/* {status.length > 0 &&
             status.map((status) => {
               if (status === "toDo")
