@@ -6,7 +6,7 @@ import SideBar from "../SideBar/SideBar";
 export default function Layout() {
   return (
     <>
-      <div className=" bg-blue-50">
+      <div className=" bg-blue-50 w-full">
         <Header />
         <SideBar />
         <Outlet />

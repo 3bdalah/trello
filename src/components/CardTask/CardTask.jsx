@@ -16,7 +16,7 @@ export default function CardTask({ task, formattedDeadline }) {
     <>
       <div
         ref={drag}
-        className="  bg-slate-50 m-2 rounded-md p-2 border-1 border-dashed hover:shadow-md transition duration-300 ease-linear cursor-pointer relative"
+        className="card-task  bg-slate-50 m-2 rounded-md p-2 border-1 border-dashed hover:shadow-md transition duration-300 ease-linear cursor-pointer relative"
         key={task._id}
       >
         {task.assignedTo ? task.assignedTo.email : "No Email Available"}
