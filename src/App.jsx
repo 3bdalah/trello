@@ -14,6 +14,7 @@ import CreatedTasks from "./components/CreatedTasks/CreatedTasks";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import MyTasks from "./components/MyTasks/MyTasks";
 import Notifications from "./components/Notifications/Notifications";
+import AboutHeader from "./components/About-header/About-header";
 
 function App() {
   const routes = createBrowserRouter([
@@ -35,7 +36,7 @@ function App() {
         { path: "/add-task", element: <CreateTask /> },
         { path: "/created-tasks", element: <CreatedTasks /> },
         { path: "/my-tasks", element: <MyTasks /> },
-
+        { path: "/about", element: <AboutHeader /> },
         { path: "/notifications", element: <Notifications /> },
         { path: "/employees", element: <EmployeeList /> },
         { path: "/tasks", element: <TasksList /> },
