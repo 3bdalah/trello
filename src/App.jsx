@@ -25,9 +25,9 @@ function App() {
       path: "",
       element: <Layout />,
       children: [
+        { path: "/login", element: <Login /> },
         { index: true, element: <Home /> },
         { path: "/register", element: <Register /> },
-        { path: "/login", element: <Login /> },
         {
           path: "/profile",
           element: (
