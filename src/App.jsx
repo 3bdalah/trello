@@ -14,6 +14,10 @@ import CreatedTasks from "./components/CreatedTasks/CreatedTasks";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import MyTasks from "./components/MyTasks/MyTasks";
 import Notifications from "./components/Notifications/Notifications";
+import AboutHeader from "./components/About-header/About-header";
+import Settings from "./components/Settings/Settings";
+import Chat from "./components/Chat/Chat";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const routes = createBrowserRouter([
@@ -35,13 +39,17 @@ function App() {
         { path: "/add-task", element: <CreateTask /> },
         { path: "/created-tasks", element: <CreatedTasks /> },
         { path: "/my-tasks", element: <MyTasks /> },
-
+        { path: "/about", element: <AboutHeader /> },
         { path: "/notifications", element: <Notifications /> },
         { path: "/employees", element: <EmployeeList /> },
+        { path: "/setting", element: <Settings /> },
+        { path: "/chats", element: <Chat /> },
+        { path: "/dashboard", element: <Dashboard /> },
         { path: "/tasks", element: <TasksList /> },
         { path: "*", element: <NotFound /> },
       ],
     },
+    { path: "/about", element: <AboutHeader /> },
   ]);
 
   return <RouterProvider router={routes}></RouterProvider>;

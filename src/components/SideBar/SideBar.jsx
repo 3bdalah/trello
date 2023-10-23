@@ -19,7 +19,7 @@ export default function SideBar() {
   return (
     <>
       {dataProfile && (
-        <div className="parent-side sidebar  ">
+        <div className="parent-side sidebar  z-auto">
           <aside
             className={
               "side-bar h-full bg-slate-100 w-48 fixed top-0 left-0  shadow-md rounded-md " +
@@ -27,7 +27,7 @@ export default function SideBar() {
             }
           >
             <button
-              className="bg-slate-100 w-12 rounded-sm h-10 absolute right-[-48px] top-14"
+              className="bg-slate-50 w-12 rounded-sm h-10 absolute right-[-48px] top-14 z-50 "
               onClick={() => {
                 setToggle((prevToggle) => !prevToggle);
               }}
@@ -40,15 +40,15 @@ export default function SideBar() {
             </button>
             <ul className="flex justify-center items-left flex-col pl-0 content-center ">
               <li className="w-full ml-16 mt-3 mb-2">
-                <Link to="/profile" className="no-underline">
-                  <div className="h-14 w-14 rounded-full  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-slate-400 text-3xl shadow-sm">
+                <Link to="/profile" className=" no-underline w-fit ">
+                  <div className="h-14 w-14  rounded-full  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-slate-400 text-3xl shadow-sm">
                     {dataProfile.userName
                       ? dataProfile.userName.substring(0, 1)
                       : ""}
                   </div>
                 </Link>
-                <Link to="/profile" className="no-underline">
-                  <div className="mt-1 text-gray-400 rounded-full  font-bold font-mono relative text-sm">
+                <Link to="/profile" className=" bg-black w-fit">
+                  <div className="mt-1 text-gray-400 rounded-full  w-fit font-bold font-mono relative text-sm">
                     {dataProfile.fName ? dataProfile.fName : ""}{" "}
                   </div>
                 </Link>
