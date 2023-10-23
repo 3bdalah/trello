@@ -16,8 +16,7 @@ function CreatedTasks() {
         "https://trello-backend-tlg1.onrender.com/getaAllTasksForUser",
         {
           headers: {
-            token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNmMWFmODJiZTI0N2EwMzI5NDQzNiIsImlhdCI6MTY5NzkwMzE2Nn0.YCmU1HAIIEH-20ZMBVb90bgt8VOgPSD_ChjIjTjJ72M",
+            token: localStorage.getItem("token"),
           },
         }
       );
