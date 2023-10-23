@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-gray-300 py-4 text-center absolute bottom-0 w-full">
+    <footer className="bg-gray-800 text-gray-300 py-4 text-center  w-full">
       <div className="container mx-auto">
         <p className="text-sm">
           &copy; {new Date().getFullYear()} Trello App. All rights reserved.
