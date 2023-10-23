@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TokenContext } from "./../../Context/UserContext";
 import toast, { Toaster } from "react-hot-toast";
+// import { useHistory } from "react-router-dom";
+
 export default function Login() {
+  // let history = useHistory();
   let navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState(null);
@@ -28,15 +31,19 @@ export default function Login() {
       );
       console.log(res);
       if (res.data.message == "logged in successfully") {
-        notifySuccess("Success!")
-        setTimeout(()=>{
-          navigate("/profile")
-        },3000)
-      console.log(res);
-    } else if (res.data.message == "password not correct" || res.data.message == "User not found, You have to register first"){
-      notifyError("Invalid email or password!")
-      console.log("faild to login ", res)
-    }
+        localStorage.setItem("token", res.data.token);
+        notifySuccess("Success!");
+        setTimeout(() => {
+          navigate("/profile");
+        }, 3000);
+        console.log(res);
+      } else if (
+        res.data.message == "password not correct" ||
+        res.data.message == "User not found, You have to register first"
+      ) {
+        notifyError("Invalid email or password!");
+        console.log("faild to login ", res);
+      }
     } catch (error) {
       console.log("error", error);
     }
@@ -60,12 +67,13 @@ export default function Login() {
       if (res.data.message === "logged in successfully") {
         notifySuccess("Logged in successfully!");
         setToken(res.data.token);
-        setTimeout(()=>{
-          navigate("/profile")
-        },3000)
+        localStorage.setItem("token", res.data.token);
+        setTimeout(() => {
+          navigate("/profile");
+        }, 3000);
       }
 
-      localStorage.setItem("token", res.data.token);
+      // localStorage.setItem("token", res.data.token);
     } catch (error) {
       console.log("error", error);
     }
@@ -80,11 +88,10 @@ export default function Login() {
 
   let validationSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .matches(
-        /^(?=.*[A-Z])(?=.*\d).{6,}$/,
-        "Invalid password. Password must have at least one uppercase letter, one digit, and be at least 6 characters long."
-      )
+    password: Yup.string().matches(
+      /^(?=.*[A-Z])(?=.*\d).{6,}$/,
+      "Invalid password. Password must have at least one uppercase letter, one digit, and be at least 6 characters long."
+    ),
   });
   let formik = useFormik({
     initialValues: {
