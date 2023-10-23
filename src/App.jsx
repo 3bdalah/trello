@@ -39,16 +39,17 @@ function App() {
         { path: "/add-task", element: <CreateTask /> },
         { path: "/created-tasks", element: <CreatedTasks /> },
         { path: "/my-tasks", element: <MyTasks /> },
-
+        { path: "/about", element: <AboutHeader /> },
         { path: "/notifications", element: <Notifications /> },
         { path: "/employees", element: <EmployeeList /> },
-        {path: "/setting",element:<Settings/>},
-        {path: "/chats", element:<Chat/>},
-        {path: "/dashboard",element:<Dashboard/>},
+        { path: "/setting", element: <Settings /> },
+        { path: "/chats", element: <Chat /> },
+        { path: "/dashboard", element: <Dashboard /> },
         { path: "/tasks", element: <TasksList /> },
         { path: "*", element: <NotFound /> },
       ],
-    }, { path: "/about", element: <AboutHeader /> },
+    },
+    { path: "/about", element: <AboutHeader /> },
   ]);
 
   return <RouterProvider router={routes}></RouterProvider>;

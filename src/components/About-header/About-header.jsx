@@ -1,33 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-
-
+import { Link } from "react-router-dom";
 
 export default function AboutHeader() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <div className="container">
-      <Link className="navbar-brand" to="/">
-        Trello
-      </Link>
-      <div className="navbar-nav">
-        <Link className="nav-link" to="/about">
-          About
-        </Link>
-        <Link className="nav-link" to="/login">
-          Sign In
-        </Link>
-        <Link className="nav-link">
-          <button className="btn btn-primary">
-            <Link to="/register" className="btn-link text-black">
-              Sign Up
+    <nav className="z-0 font-mono capitalize  bg-white shadow-md h-12 flex flex-row items-center content-center  justify-between">
+      <div className="container flex flex-row items-center content-center  justify-between">
+        <div className="logo ">
+          <h5 className="font-mono text-stone-500 ">
+            {" "}
+            <Link to="/" className="text-gray-500 no-underline">
+              trello
             </Link>
-          </button>
-        </Link>
+          </h5>
+        </div>
+        <ul className=" list-none flex flex-row w-96 items-center mb-0 justify-center content-center">
+          <li className="no-underline mx-3">
+            <Link to="/about" className=" no-underline">
+              about
+            </Link>
+          </li>
+          <li className="no-underline mx-3">
+            <Link to="/register" className=" capitalize no-underline">
+              sign Up
+            </Link>
+          </li>
+          <li className="no-underline mx-3">
+            <Link to="/login" className=" no-underline">
+              sign In
+            </Link>
+          </li>
+        </ul>
       </div>
-    </div>
-  </nav>
-
-  )
+    </nav>
+  );
 }
