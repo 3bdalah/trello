@@ -1,4 +1,4 @@
-import UnderProgress from "../Under-progress/under-progress";
+import UnderProgress from "../UnderProgress/UnderProgress";
 
 
 
