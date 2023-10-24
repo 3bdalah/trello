@@ -2,7 +2,7 @@ import "./App.css";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import Home from "./components/Home/Home";
+// import Home from "./components/Home/Home";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
@@ -26,7 +26,7 @@ function App() {
       element: <Layout />,
       children: [
         { path: "/login", element: <Login /> },
-        { index: true, element: <Home /> },
+        { index: true, element: <AboutHeader /> },
         { path: "/register", element: <Register /> },
         {
           path: "/profile",
@@ -36,16 +36,79 @@ function App() {
             </ProtectedRoutes>
           ),
         },
-        { path: "/add-task", element: <CreateTask /> },
-        { path: "/created-tasks", element: <CreatedTasks /> },
-        { path: "/my-tasks", element: <MyTasks /> },
+        {
+          path: "/add-task",
+          element: (
+            <ProtectedRoutes>
+              <CreateTask />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/created-tasks",
+          element: (
+            <ProtectedRoutes>
+              <CreatedTasks />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/my-tasks",
+          element: (
+            <ProtectedRoutes>
+              <MyTasks />
+            </ProtectedRoutes>
+          ),
+        },
         { path: "/about", element: <AboutHeader /> },
-        { path: "/notifications", element: <Notifications /> },
-        { path: "/employees", element: <EmployeeList /> },
-        { path: "/setting", element: <Settings /> },
-        { path: "/chats", element: <Chat /> },
-        { path: "/dashboard", element: <Dashboard /> },
-        { path: "/tasks", element: <TasksList /> },
+        {
+          path: "/notifications",
+          element: (
+            <ProtectedRoutes>
+              <Notifications />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/employees",
+          element: (
+            <ProtectedRoutes>
+              <EmployeeList />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/setting",
+          element: (
+            <ProtectedRoutes>
+              <Settings />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/chats",
+          element: (
+            <ProtectedRoutes>
+              <Chat />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/dashboard",
+          element: (
+            <ProtectedRoutes>
+              <Dashboard />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/tasks",
+          element: (
+            <ProtectedRoutes>
+              <TasksList />
+            </ProtectedRoutes>
+          ),
+        },
         { path: "*", element: <NotFound /> },
       ],
     },
