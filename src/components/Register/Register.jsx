@@ -88,7 +88,7 @@ export default function Register() {
   });
 
   return (
-    <div className="flex h-full justify-center mt-10">
+    <div className="flex h-full justify-center pt-10">
       <Toaster />
       <div className="m-auto rounded-md  border-t-4  border-blue-800 ">
         <form
@@ -228,17 +228,20 @@ export default function Register() {
           ) : (
             ""
           )}
-          <button
-            type="submit"
-            className="h-10 p-2 w-full  font-mono bg-blue-700 text-slate-50 border-1 border-gray-100  mb-4  border-y border-x rounded-md"
-          >
-            Register
-          </button>
-          <button className="h-10 p-2 w-full  font-mono bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out text-slate-50 border-1 border-gray-100  mb-4  border-y border-x rounded-md">
-            <Link className="text-slate-100 no-underline" to={"/login"}>
+          <div className="flex flex-col items-start justify-center content-center">
+            <button
+              type="submit"
+              className="h-10 p-2 w-full  font-mono bg-blue-700 hover:bg-blue-800 transition duration-200 text-slate-50 border-1 border-gray-100  mb-1  border-y border-x rounded-md"
+            >
+              Register
+            </button>
+            <Link
+              className="text-center  w-full  no-underline hover:shadow-md transition duration-200 ease-linear my-2 bg-gray-500 hover:bg-gray-800 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              to={"/login"}
+            >
               Login
             </Link>
-          </button>
+          </div>
         </form>
       </div>
     </div>
