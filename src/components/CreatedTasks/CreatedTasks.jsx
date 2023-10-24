@@ -56,7 +56,7 @@ function CreatedTasks() {
   return (
     <>
       <DndProvider backend={HTML5Backend}>
-        <div className="flex items-start justify-center">
+        <div className="flex items-start justify-center min-h-screen">
           <ColumnTask
             tasks={toDoTasks}
             status={"toDo"}

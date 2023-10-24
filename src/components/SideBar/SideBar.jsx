@@ -19,7 +19,7 @@ export default function SideBar() {
   return (
     <>
       {dataProfile && (
-        <div className="parent-side sidebar  z-auto">
+        <div className="parent-side sidebar  z-50">
           <aside
             className={
               "side-bar h-full bg-slate-100 w-48 fixed top-0 left-0  shadow-md rounded-md " +
