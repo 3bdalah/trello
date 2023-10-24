@@ -1,12 +1,11 @@
 import { useFormik } from "formik";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import * as Yup from "yup";
 import axios from "axios";
 
 export default function Register() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const notifySuccess = (message) => {
     toast.success(message);
   };
@@ -14,10 +13,7 @@ export default function Register() {
     toast.error(message);
   };
 
-
   const submitRegister = async (values) => {
-
-
     try {
       let { data } = await axios.post(
         "https://trello-backend-tlg1.onrender.com/signup",
@@ -25,19 +21,17 @@ export default function Register() {
       );
       console.log(data);
       if (data.message == "added successfully") {
-        notifySuccess("Success!")
-        setTimeout(()=>{
-          navigate("/login")
-        },3000)
-
-      } else{
-        notifyError("Failed to signup!")
-        console.log(data)
+        notifySuccess("Success!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } else {
+        notifyError("Failed to signup!");
+        console.log(data);
       }
     } catch (error) {
-      notifyError("Failed to signup!")
+      notifyError("Failed to signup!");
       console.log(error);
-
     }
   };
 
@@ -88,17 +82,15 @@ export default function Register() {
     },
     validationSchema,
     onSubmit: (values) => {
-      
-      delete values["rePassword"]
+      delete values["rePassword"];
       submitRegister(values);
     },
   });
 
   return (
-    <div className="flex h-full justify-center ">
-      <Toaster/>
+    <div className="flex h-full justify-center mt-10">
+      <Toaster />
       <div className="m-auto rounded-md  border-t-4  border-blue-800 ">
-        
         <form
           className="bg-white shadow-md  w-96 rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={formik.handleSubmit}
@@ -175,11 +167,11 @@ export default function Register() {
 
           {formik.errors.password && formik.touched.password ? (
             <div className="alert alert-danger">{formik.errors.password}</div>
-            ) : (
-              ""
-              )}
+          ) : (
+            ""
+          )}
           <input
-            className="h-10 p-2 w-full  border-1 border-gray-100  mb-4  border-y border-x rounded-md"
+            className="h-10 p-2 w-full  border-1 border-gray-100  mb-4 border-y border-x rounded-md"
             placeholder="Password Confirmation"
             type="password"
             name="rePassword"
@@ -189,33 +181,39 @@ export default function Register() {
           />
           {formik.errors.rePassword && formik.touched.rePassword ? (
             <div className="alert alert-danger">{formik.errors.rePassword}</div>
-            ) : (
-              ""
-              )}
-<label htmlFor="gender" className="h-10 p-2 w-full mb-4 rounded-md">Gender</label>
-<select className="h-10 p-2 w-full border-1 border-gray-100 mb-4 border-y border-x rounded-md" name="gender" id="gender" onChange={formik.handleChange} value={formik.values.gender}>
-  <option >Select</option>
-  <option value="male">Male</option>
-  <option value="female">Female</option>
-</select>
-{formik.errors.gender && formik.touched.gender ? (
+          ) : (
+            ""
+          )}
+
+          <select
+            className="h-10 p-2 text-gray-400  w-full border-1 border-gray-100 mb-4 border-y border-x rounded-md"
+            name="gender"
+            id="gender"
+            onChange={formik.handleChange}
+            value={formik.values.gender}
+          >
+            <option>Gender....</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          {formik.errors.gender && formik.touched.gender ? (
             <div className="alert alert-danger">{formik.errors.gender}</div>
           ) : (
             ""
           )}
 
-              <input
-                className="h-10 p-2 w-full  border-1 border-gray-100  mb-4  border-y border-x rounded-md"
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formik.values.phone}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder="Enter your phone number"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                required
-              />
+          <input
+            className="h-10 p-2 w-full  border-1 border-gray-100  mb-4  border-y border-x rounded-md"
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formik.values.phone}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Enter your phone number"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            required
+          />
           <input
             className="h-10 p-2 w-full  border-1 border-gray-100  mb-4  border-y border-x rounded-md"
             placeholder="Age"

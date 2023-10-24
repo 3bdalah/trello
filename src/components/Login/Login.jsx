@@ -3,7 +3,7 @@ import { useEffect, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TokenContext } from "./../../Context/UserContext";
 import toast, { Toaster } from "react-hot-toast";
@@ -118,7 +118,13 @@ export default function Login() {
               {" "}
               Login
             </h3>
-            <div className="flex items-center justify-center flex-col">
+            <div className="flex items-start   justify-center flex-col">
+              <label
+                htmlFor="password"
+                className="mb-1 text-gray-400 font-mono capitalize"
+              >
+                email:
+              </label>
               <input
                 type="email"
                 className="h-10 p-2 w-full bg-stone-50 border-y border-x  border-slate-100 rounded-md"
@@ -132,7 +138,13 @@ export default function Login() {
                 <div className="alert alert-danger">{formik.errors.email}</div>
               ) : null}
             </div>
-            <div className="mt-9 flex items-center justify-center flex-col">
+            <div className="mt-4 flex items-start justify-center flex-col">
+              <label
+                htmlFor="password"
+                className="mb-1 text-gray-400 font-mono capitalize"
+              >
+                password:
+              </label>
               <input
                 type="password"
                 className="h-10 p-2 w-full bg-stone-50  border-y border-x  border-slate-100 rounded-md"
@@ -148,13 +160,19 @@ export default function Login() {
                 </div>
               ) : null}
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
               <button
-                className="my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="w-full mt-4 bg-blue-500 transition duration-200 ease-linear hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Sign In
               </button>
+              <Link
+                to="/register"
+                className="text-center w-full no-underline hover:shadow-md transition duration-200 ease-linear my-2 bg-gray-500 hover:bg-gray-800 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Sign Up
+              </Link>
             </div>
             <div className="flex items-center justify-center flex-col lowercase">
               <h5 className="mb-4 text-gray-500 text-center font-serif  text-sm capitalize">
