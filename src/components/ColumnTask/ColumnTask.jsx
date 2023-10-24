@@ -4,8 +4,13 @@ import { useDrop } from "react-dnd";
 import { formatDate } from "../../Utils/Consts";
 import CardTask from "../CardTask/CardTask";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 function ColumnTask({ tasks, status, updateTasks }) {
   const filteredTasks = tasks.filter((task) => task.status === status);
+  const notifySuccess = (message) => {
+    toast.success(message);
+  };
 
   // eslint-disable-next-line no-unused-vars
   const [{ isOver }, drop] = useDrop(() => ({
@@ -16,9 +21,6 @@ function ColumnTask({ tasks, status, updateTasks }) {
     }),
   }));
   const addItemToAnotherCol = async (id) => {
-    console.log("id task", id);
-    console.log("id status", status);
-
     try {
       let { data } = await axios.put(
         "https://trello-backend-tlg1.onrender.com/updatetask",
@@ -28,11 +30,11 @@ function ColumnTask({ tasks, status, updateTasks }) {
         },
         {
           headers: {
-            token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNmMWFmODJiZTI0N2EwMzI5NDQzNiIsImlhdCI6MTY5NzkwMzE2Nn0.YCmU1HAIIEH-20ZMBVb90bgt8VOgPSD_ChjIjTjJ72M",
+            token: localStorage.getItem("token"),
           },
         }
       );
+      notifySuccess(`Moved to ${status}`);
       console.log("respone to update task ", data);
       updateTasks(id, status);
     } catch (error) {
@@ -46,6 +48,7 @@ function ColumnTask({ tasks, status, updateTasks }) {
         ref={drop}
         className=" bg-white p-2 border-1 border-gray-300 w-1/4 m-2 border-dashed rounded-sm h-44"
       >
+        <Toaster />
         <div className="head-col flex justify-between items-center content-center">
           <h3 className="m-2 font-thin capitalize text-gray-600">{status}</h3>
           <span
@@ -61,20 +64,26 @@ function ColumnTask({ tasks, status, updateTasks }) {
           </span>
         </div>
         {status === "toDo" && (
-          <p className="text-gray-400 text-center my-4">
+          <p className="text-gray-400 text-center">
             No tasks found. Start by creating a new task!
           </p>
         )}
         {status === "done" && (
-          <p className="text-gray-400 text-center my-4">
-            No tasks have been completed yet.
+          <p className="text-gray-400 text-center">
+            No tasks found. Start by creating a new task!
           </p>
         )}
         {status === "doing" && (
-          <p className="text-gray-400 text-center my-4">
-            No tasks are in progress right now.
+          <p className="text-gray-400 text-center">
+            No tasks found. Start by creating a new task!
           </p>
         )}
+        <button className="my-2 w-full text-center bg-blue-100 h-10 leading-loose cursor-pointer font-semibold text-gray-800 capitalize rounded-md">
+          <Link to="/add-task" className="text-gray-700 no-underline font-mono">
+            {" "}
+            create Task
+          </Link>
+        </button>
       </div>
     );
   }
@@ -118,7 +127,10 @@ function ColumnTask({ tasks, status, updateTasks }) {
           })}
         </div>
         <button className="my-2  w-full text-center bg-blue-100 h-10 leading-loose cursor-pointer font-semibold text-gray-800 capitalize rounded-md">
-          create Task
+          <Link to="/add-task" className="text-gray-700 no-underline font-mono">
+            {" "}
+            create Task
+          </Link>
         </button>
       </div>
     </>

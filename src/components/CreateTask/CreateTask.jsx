@@ -9,9 +9,6 @@ import { useEffect, useState } from "react";
 export default function CreateTask() {
   const [employees, setEmployees] = useState([]);
 
-  /*  
-  token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmZlZTZlNGQyMmVhYmNlYzUwNjJlNCIsImlhdCI6MTY5NzY0MTMzMn0.QZdbhYW4RBrvB-NrAPL5fdMzsFPNs3FDTHRIFeNck24
-  */
   const queryClient = useQueryClient();
   const notifySuccess = (message) => {
     toast.success(message);
