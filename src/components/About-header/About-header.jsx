@@ -44,7 +44,7 @@ export default function AboutHeader() {
               loop
             >
               <source
-                src="../../../public/media/overview-trello.mp4"
+                src="/public/media/overview-trello.mp4"
                 type="video/mp4"
               />
               {/* <source src="../../assets/media/overview.mp4" type="video/mp4" /> */}
