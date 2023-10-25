@@ -43,10 +43,7 @@ export default function AboutHeader() {
               muted
               loop
             >
-              <source
-                src="/public/media/overview-trello.mp4"
-                type="video/mp4"
-              />
+              <source src="/media/overview-trello.mp4" type="video/mp4" />
               {/* <source src="../../assets/media/overview.mp4" type="video/mp4" /> */}
             </video>
           </div>
