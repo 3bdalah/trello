@@ -71,7 +71,7 @@ export default function Header() {
                   className=" capitalize no-underline w-12 h-12"
                 >
                   <div className="h-10 w-10 rounded-full  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
-                    {dataProfile.userName
+                    {dataProfile && dataProfile.userName
                       ? dataProfile.userName.substring(0, 1)
                       : ""}
                   </div>

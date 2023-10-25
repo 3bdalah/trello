@@ -8,6 +8,7 @@ import axios from "axios";
 import { TokenContext } from "./../../Context/UserContext";
 import toast, { Toaster } from "react-hot-toast";
 // import { useHistory } from "react-router-dom";
+import Navbar from "./../Navbar/Navbar";
 
 export default function Login() {
   // let history = useHistory();
@@ -31,12 +32,13 @@ export default function Login() {
       );
       console.log(res);
       if (res.data.message == "logged in successfully") {
-        localStorage.setItem("token", res.data.token);
+        const { token } = res.data;
+        localStorage.setItem("token", token);
         notifySuccess("Success!");
-        setToken(res.data.token);
+        setToken(token);
         setTimeout(() => {
           navigate("/profile");
-        }, 1000);
+        }, 10);
         console.log(res);
       } else if (
         res.data.message == "password not correct" ||
@@ -108,6 +110,7 @@ export default function Login() {
   });
   return (
     <>
+      <Navbar />
       <div className="flex h-screen justify-center">
         <Toaster />
         <div className="m-auto w-full max-w-xs border-t-4 border-blue-600 rounded-md">
