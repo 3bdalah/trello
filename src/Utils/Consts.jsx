@@ -91,19 +91,19 @@ export const collaborators = [
     name: "Mahmoud Alsameen",
     title: "Backend Developer",
     link: "https://github.com/MahmoudAlsameen",
-    src:"../../../public/7oda.png",
+    src: "../../../public/7oda.jpg",
   },
   {
     name: "Ahmed Elsayed",
     title: "UI Developer",
     link: "https://github.com/AhmedMohamed17",
-    src:"../../../public/ahmed.png",
+    src: "../../../public/ahmed.png",
   },
   {
     name: "Abdallah Abdelghaffar",
     title: "Frontend Developer",
     link: "https://twitter.com/It3bdallah",
-    src:"../../../public/3bdo.png",
+    src: "../../../public/3bdo.png",
   },
 ];
 export default links;
