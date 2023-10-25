@@ -2,47 +2,13 @@ import { Link } from "react-router-dom";
 import styles from "./About-header.module.css";
 import { collaborators } from "../../Utils/Consts";
 import Footer from "./../Footer/Footer";
+import Navbar from "./../Navbar/Navbar";
 export default function AboutHeader() {
   return (
     <>
       {" "}
       <div className="bg-white pb-10">
-        {!localStorage.getItem("token") && (
-          <nav
-            className={
-              "z-0 font-mono capitalize  bg-white shadow-md h-12 flex flex-row items-center content-center  justify-between" +
-              styles.shadowCustom
-            }
-          >
-            <div className="container flex flex-row items-center content-center  justify-between">
-              <div className="logo ">
-                <h5 className="font-mono text-stone-500 ">
-                  {" "}
-                  <Link to="/" className="text-gray-500 no-underline">
-                    trello
-                  </Link>
-                </h5>
-              </div>
-              <ul className=" list-none flex flex-row w-96 items-center mb-0 justify-center content-center">
-                <li className="no-underline mx-3">
-                  <Link to="/about" className=" no-underline">
-                    about
-                  </Link>
-                </li>
-                <li className="no-underline mx-3">
-                  <Link to="/register" className=" capitalize no-underline">
-                    sign Up
-                  </Link>
-                </li>
-                <li className="no-underline mx-3">
-                  <Link to="/login" className=" no-underline">
-                    sign In
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        )}
+        <Navbar />
         <div className="container">
           <div className="hero h-screen flex flex-row justify-center items-center content-center">
             <div className="text-about w-2/3">

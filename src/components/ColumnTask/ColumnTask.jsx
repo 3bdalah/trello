@@ -78,12 +78,19 @@ function ColumnTask({ tasks, status, updateTasks }) {
             No tasks found. Start by creating a new task!
           </p>
         )}
-        <button className="my-2 w-full text-center bg-blue-100 h-10 leading-loose cursor-pointer font-semibold text-gray-800 capitalize rounded-md">
-          <Link to="/add-task" className="text-gray-700 no-underline font-mono">
-            {" "}
-            create Task
-          </Link>
-        </button>
+        {status != "remove" ? (
+          <button className="my-2 w-full text-center bg-blue-100 h-10 leading-loose cursor-pointer font-semibold text-gray-800 capitalize rounded-md">
+            <Link
+              to="/add-task"
+              className="text-gray-700 no-underline font-mono"
+            >
+              {" "}
+              create Task
+            </Link>
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -126,12 +133,19 @@ function ColumnTask({ tasks, status, updateTasks }) {
             );
           })}
         </div>
-        <button className="my-2  w-full text-center bg-blue-100 h-10 leading-loose cursor-pointer font-semibold text-gray-800 capitalize rounded-md">
-          <Link to="/add-task" className="text-gray-700 no-underline font-mono">
-            {" "}
-            create Task
-          </Link>
-        </button>
+        {status != "remove" ? (
+          <button className="my-2  w-full text-center bg-blue-100 h-10 leading-loose cursor-pointer font-semibold text-gray-800 capitalize rounded-md">
+            <Link
+              to="/add-task"
+              className="text-gray-700 no-underline font-mono"
+            >
+              {" "}
+              create Task
+            </Link>
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
