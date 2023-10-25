@@ -33,9 +33,10 @@ export default function Login() {
       if (res.data.message == "logged in successfully") {
         localStorage.setItem("token", res.data.token);
         notifySuccess("Success!");
+        setToken(res.data.token);
         setTimeout(() => {
           navigate("/profile");
-        }, 3000);
+        }, 1000);
         console.log(res);
       } else if (
         res.data.message == "password not correct" ||
@@ -70,7 +71,7 @@ export default function Login() {
         localStorage.setItem("token", res.data.token);
         setTimeout(() => {
           navigate("/profile");
-        }, 3000);
+        }, 2000);
       }
 
       // localStorage.setItem("token", res.data.token);

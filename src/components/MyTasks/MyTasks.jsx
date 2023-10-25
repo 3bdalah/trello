@@ -43,26 +43,22 @@ function MyTasks() {
     const toDo = createdTasks.filter((task) => task.status === "toDo");
     const doing = createdTasks.filter((task) => task.status === "doing");
     const done = createdTasks.filter((task) => task.status === "done");
-
+    // const remove = createdTasks.filter((task) => task.status === "done");
     setColumns([
       { title: "To Do", status: "toDo", tasks: toDo },
       { title: "Doing", status: "doing", tasks: doing },
       { title: "Done", status: "done", tasks: done },
+      // {
+      //   title: "Remove",
+      //   status: "remove",
+      //   tasks: [],
+      // },
     ]);
   }, [createdTasks]);
 
-  const handleAddColumn = () => {
-    const newColumn = {
-      title: "New Column",
-      tasks: [],
-      status: "new",
-    };
-    setColumns([...columns, newColumn]);
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex items-start justify-center">
+      <div className="min-h-screen flex items-start justify-center">
         {columns.map((column, index) => (
           <ColumnTask
             key={index}
@@ -72,7 +68,6 @@ function MyTasks() {
           />
         ))}
       </div>
-      <button onClick={handleAddColumn}>Add Column</button>
     </DndProvider>
   );
 }
