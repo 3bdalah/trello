@@ -42,7 +42,7 @@ let tasksSlice = createSlice({
     });
     builder.addCase(getAllMyTasksCreated.fulfilled, (state, action) => {
       state.tasksCreatedByMe = action.payload;
-      // state.createdTasksLength = state.tasksCreatedByMe.length;
+      state.createdTasksLength = state.tasksCreatedByMe.length;
     });
   },
 });
