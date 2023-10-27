@@ -18,10 +18,6 @@ export default function Profile() {
     setDataProfile(user.user);
     console.log("user data", user.user);
   }, [user]);
-  // useEffect(() => {
-  //   window.location.reload();
-  // }, [localStorage.getItem("token")]);
-  // const { userName, fName, lName, email, age, phone, gender } = dataProfile;
 
   return (
     <div>
