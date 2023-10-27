@@ -62,18 +62,21 @@ function CreatedTasks() {
             status={"toDo"}
             key={"todo"}
             updateTasks={updateTasks}
+            getAllCreatedTasks={getAllCreatedTasks}
           />
           <ColumnTask
             tasks={doingTasks}
             status={"doing"}
             key={"doing"}
             updateTasks={updateTasks}
+            getAllCreatedTasks={getAllCreatedTasks}
           />
           <ColumnTask
             tasks={doneTasks}
             status={"done"}
             key={"done"}
             updateTasks={updateTasks}
+            getAllCreatedTasks={getAllCreatedTasks}
           />
           {/* {status.length > 0 &&
             status.map((status) => {
