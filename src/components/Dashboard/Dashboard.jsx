@@ -11,10 +11,18 @@ export default function Dashboard() {
   let myTasksAssignMe = useSelector(
     (state) => state.tasksRed.tasksAssignedMe.allTasksAssignedToUser
   );
+  let createdTasksLength = useSelector(
+    (state) => state.tasksRed.createdTasksLength
+  );
 
   console.log("data from employees redux ", allEmployees);
   console.log("data from employees redux myTasksAssignMe", myTasksAssignMe);
-  console.log("data from counter employees redux ", counterEmployees);
+  console.log(
+    "data from counter tasks createdTasksLength ",
+    createdTasksLength,
+    "assignendTasksLength"
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,9 +32,13 @@ export default function Dashboard() {
   }, [dispatch]);
   const tasksData = [
     { text: "tasks done", num: counterEmployees, color: "bg-blue-300" },
-    { text: "tasks doing", num: 10, color: "bg-yellow-300" },
-    { text: "tasks todo", num: 42, color: "bg-green-300" },
-    { text: "all tasks", num: 14, color: "bg-red-400" },
+    { text: "tasks doing", num: 0, color: "bg-yellow-300" },
+    { text: "all employees ", num: counterEmployees, color: "bg-green-300" },
+    {
+      text: "all tasks",
+      num: myTasksAssignMe.length + createdTasksLength,
+      color: "bg-red-400",
+    },
   ];
 
   return (
