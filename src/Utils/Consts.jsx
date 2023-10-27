@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 const links = [
   {
     to: "/help",
@@ -107,3 +109,14 @@ export const collaborators = [
   },
 ];
 export default links;
+
+export const calculateTimeRemaining = (deadline) => {
+  const now = moment();
+  const end = moment(deadline);
+  const duration = moment.duration(end.diff(now));
+  const days = Math.floor(duration.asDays());
+  const hours = duration.hours();
+  const minutes = duration.minutes();
+
+  return `${days} days, ${hours} hours, ${minutes} minutes`;
+};
