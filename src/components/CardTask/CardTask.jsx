@@ -9,12 +9,15 @@ import { useDrag } from "react-dnd";
 import { TokenContext } from "../../Context/UserContext";
 import toast, { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 export default function CardTask({
   task,
   formattedDeadline,
 
   getAllCreatedTasks,
 }) {
+  const location = useLocation();
+  console.log("location", location.pathname);
   const { token } = useContext(TokenContext);
   const [open, setOpen] = useState(false);
   const [employees, setEmployees] = useState([]);
@@ -124,7 +127,7 @@ export default function CardTask({
   useEffect(() => {
     // setOpen(!open);
     handleGetAllEmployee();
-  }, [employees]);
+  }, []);
   return (
     <>
       {open && (
@@ -277,19 +280,31 @@ export default function CardTask({
         <p className="m-0 text-gray-400 mt-1">
           <i className="fa fa-clock"></i> {formattedDeadline}
         </p>
-        <div className="w-full flex items-center justify-around content-center mb-2">
-          <button
-            onClick={handleTogglePop}
-            className="bg-white border-1 rounded-md  w-full px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
-          >
-            edite
-          </button>
-          <button
-            onClick={handleRemoveTask}
-            className="bg-white border-1 rounded-md  w-full ml-2 px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
-          >
-            remove
-          </button>
+        <div className="w-full flex items-center justify-center content-center mb-2">
+          {location.pathname === "/created-tasks" ? (
+            <>
+              {" "}
+              <button
+                onClick={handleTogglePop}
+                className="bg-white border-1 rounded-md  w-full px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
+              >
+                edite
+              </button>
+              <button
+                onClick={handleRemoveTask}
+                className="bg-white border-1 rounded-md  w-full ml-2 px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
+              >
+                remove
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handleTogglePop}
+              className="bg-white border-1 rounded-md  w-full px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
+            >
+              edite
+            </button>
+          )}
         </div>
       </div>
     </>

@@ -38,7 +38,7 @@ export default function Login() {
         setToken(token);
         setTimeout(() => {
           navigate("/profile");
-        }, 10);
+        }, 1000);
         console.log(res);
       } else if (
         res.data.message == "password not correct" ||
