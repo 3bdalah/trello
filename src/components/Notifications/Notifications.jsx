@@ -15,8 +15,8 @@ export default function Notifications() {
   }, [dispatch]);
   return (
     <>
-      <section className="min-h-sceen bg-blue-50 pb-5 pt-3">
-        <div className="list-notifications  flex justify-center items-center flex-col content-center">
+      <section className="min-h-sceen  bg-blue-50 pb-5 pt-3">
+        <div className="list-notifications h-sceen flex justify-center items-center flex-col content-center">
           {tasks &&
             tasks.map((task, index) => {
               return (

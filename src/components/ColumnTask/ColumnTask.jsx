@@ -6,7 +6,7 @@ import CardTask from "../CardTask/CardTask";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-function ColumnTask({ tasks, status, updateTasks }) {
+function ColumnTask({ tasks, status, updateTasks, getAllCreatedTasks }) {
   const filteredTasks = tasks.filter((task) => task.status === status);
   const notifySuccess = (message) => {
     toast.success(message);
@@ -129,6 +129,7 @@ function ColumnTask({ tasks, status, updateTasks }) {
                 key={task._id}
                 task={task}
                 formattedDeadline={formattedDeadline}
+                getAllCreatedTasks={getAllCreatedTasks}
               />
             );
           })}
