@@ -57,10 +57,10 @@ export default function Header() {
               </span>
             </div>
             <div className="flex flex-row justify-center content-center items-center">
-              <span className="mr-3">
+              <span className="mr-6">
                 <Link
                   to="/notifications"
-                  className="capitalize no-underline text-gray-600 text-lg"
+                  className="capitalize no-underline text-gray-600 text-xl"
                 >
                   <i className="fa fa-bell"></i>
                 </Link>
@@ -70,7 +70,7 @@ export default function Header() {
                   to="/profile"
                   className=" capitalize no-underline w-12 h-12"
                 >
-                  <div className="h-10 w-10 rounded-full  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
+                  <div className="h-10 w-10 rounded-md  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
                     {dataProfile && dataProfile.userName
                       ? dataProfile.userName.substring(0, 1)
                       : ""}
