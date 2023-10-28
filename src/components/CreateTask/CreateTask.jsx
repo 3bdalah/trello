@@ -1,8 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-// import { useState } from "react";
-// import jwt_decode from "jwt-decode";
 import { useMutation, useQueryClient } from "react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -66,7 +64,6 @@ export default function CreateTask() {
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     status: Yup.string().required("Status task is required"),
-    // creatorID: Yup.string().required("Your ID is required"),
     assignedTo: Yup.string().required(
       "You should assign the task to an employee"
     ),
@@ -82,14 +79,12 @@ export default function CreateTask() {
     initialValues: {
       title: "",
       description: "",
-      status: "todo",
-      // creatorID: "652fee6e4d22eabcec5062e4",
+      status: "toDo",
       assignedTo: "",
       deadline: "",
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      // handleSendPost(values);
       handleMutatePost(values);
       resetForm();
     },

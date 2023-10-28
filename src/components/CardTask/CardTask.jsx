@@ -67,7 +67,6 @@ export default function CardTask({
         }
       );
       notifySuccess(`Task Removed`);
-      // setOpen(!open);
       console.log("respone to update task ", data);
       getAllCreatedTasks();
     } catch (error) {
@@ -91,11 +90,9 @@ export default function CardTask({
     }
   };
   const validationSchema = Yup.object({
-    // id: Yup.string().required("ID REquired"),
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     status: Yup.string().required("Status task is required"),
-    // // creatorID: Yup.string().required("Your ID is required"),
     assignedTo: Yup.string().required(
       "You should assign the task to an employee"
     ),
@@ -107,10 +104,8 @@ export default function CardTask({
       .required("Deadline is required and should be a valid date"),
   });
 
-  // const id = task._id;
   let formik = useFormik({
     initialValues: {
-      // id: id,
       title: task.title,
       status: task.status,
       description: task.description,
@@ -119,13 +114,11 @@ export default function CardTask({
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      // handleSendPost(values);
       handleEditeTask(values);
       resetForm();
     },
   });
   useEffect(() => {
-    // setOpen(!open);
     handleGetAllEmployee();
   }, []);
   return (
@@ -263,36 +256,42 @@ export default function CardTask({
       <div
         ref={drag}
         // onClick={handleTogglePop}
-        className="z-1 card-task bg-white m-2 rounded-md px-3 py-1 border-1 border-solid hover:shadow-md transition duration-300 ease-linear cursor-pointer relative"
+        className="z-1 card-task bg-slate-50 m-2 rounded-md px-0 py-0 border-1 border-solid hover:shadow-md transition duration-300 ease-linear cursor-pointer relative border-gray-200"
         key={task._id}
       >
-        <span className="text-gray-500 font-mono text-md">
-          To: {task.assignedTo ? task.assignedTo.email : "No Email Available"}
-        </span>
-        <br />
-        <h5 className="font-mono text-gray-600 capitalize text-sm font-bold ">
+        {location.pathname === "/created-tasks" ? (
+          <span className="text-gray-500 font-mono text-md border-b-0.5  w-full border-gray-200 block bg-white p-2 rounded-t-xl mb-2">
+            To: {task.assignedTo ? task.assignedTo.email : "No Email Available"}
+          </span>
+        ) : (
+          <span className="text-gray-500 font-mono text-md border-b-0.5  w-full border-gray-200 block bg-white p-2 rounded-t-xl mb-2">
+            from: {task.creatorID ? task.creatorID.email : "No Email Available"}
+          </span>
+        )}
+
+        <h5 className="font-mono text-gray-600 capitalize text-sm font-bold  ml-2">
           Title: {task.title}
         </h5>
 
-        <p className="text-gray-500 font-meduim first-letter:capitalize my-0">
+        <p className="text-gray-500 font-meduim first-letter:capitalize ml-2">
           {task.description}
         </p>
-        <p className="m-0 text-gray-400 mt-1">
+        <p className=" text-gray-400 ml-2 mb-0 ">
           <i className="fa fa-clock"></i> {formattedDeadline}
         </p>
-        <div className="w-full flex items-center justify-center content-center mb-2">
+        <div className="w-full flex items-center justify-center content-center mb-2 ">
           {location.pathname === "/created-tasks" ? (
             <>
               {" "}
               <button
                 onClick={handleTogglePop}
-                className="bg-white border-1 rounded-md  w-full px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
+                className="bg-white border-1 rounded-md  w-32 px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
               >
                 edite
               </button>
               <button
                 onClick={handleRemoveTask}
-                className="bg-white border-1 rounded-md  w-full ml-2 px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
+                className="bg-white border-1 rounded-md  w-32 ml-2 px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
               >
                 remove
               </button>
@@ -300,7 +299,7 @@ export default function CardTask({
           ) : (
             <button
               onClick={handleTogglePop}
-              className="bg-white border-1 rounded-md  w-full px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
+              className="bg-white border-1 rounded-md  w-64 px-3 py-1 mt-3 text-sm capitalize text-gray-600 border-gray-300 "
             >
               edite
             </button>
