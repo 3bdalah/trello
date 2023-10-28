@@ -46,7 +46,7 @@ function ColumnTask({ tasks, status, updateTasks, getAllCreatedTasks }) {
     return (
       <div
         ref={drop}
-        className=" bg-white p-2 border-1 border-gray-300 w-1/4 m-2 border-dashed rounded-sm h-44"
+        className=" bg-slate-50 p-2 border-1 border-gray-300 w-1/4 m-2 border-dashed rounded-sm h-44"
       >
         <Toaster />
         <div className="head-col flex justify-between items-center content-center">
@@ -98,22 +98,24 @@ function ColumnTask({ tasks, status, updateTasks, getAllCreatedTasks }) {
     <>
       <div
         ref={drop}
-        className=" bg-white p-2 border-1 border-gray-300   w-1/4 m-2 border-dashed  rounded-sm"
+        className=" bg-slate-50 p-2  w-1/4 m-2 border-dashed  rounded-sm"
       >
         <div className="head-col flex justify-between items-center content-center   ">
-          <h3 className="m-2 font-thin capitalize text-gray-600">{status}</h3>
+          <h3 className="m-2 font-thin text-xl text-gray-600 lowercase">
+            {status}
+          </h3>
           {status === "toDo" && (
-            <span className="bg-orange-400 text-white shadow-sm border-dashed border-1  h-fit px-2 py-0 rounded-full ">
+            <span className="bg-orange-300 text-white shadow-sm border-dashed border-1  h-fit px-2 py-0 rounded-full ">
               {tasks.length}
             </span>
           )}
           {status === "done" && (
-            <span className="bg-green-400 text-white shadow-sm border-dashed border-1  h-fit px-2 py-0 rounded-full ">
+            <span className="bg-green-300 text-white shadow-sm border-dashed border-1  h-fit px-2 py-0 rounded-full ">
               {tasks.length}
             </span>
           )}
           {status === "doing" && (
-            <span className="bg-blue-400  text-white shadow-sm border-dashed border-1 h-fit px-2 py-0 rounded-full ">
+            <span className="bg-blue-300  text-white shadow-sm border-dashed border-1 h-fit px-2 py-0 rounded-full ">
               {tasks.length}
             </span>
           )}

@@ -36,7 +36,7 @@ export default function Dashboard() {
     { text: "all employees ", num: counterEmployees, color: "bg-green-300" },
     {
       text: "all tasks",
-      num: myTasksAssignMe.length + createdTasksLength,
+       num: myTasksAssignMe && myTasksAssignMe.length + createdTasksLength,
       color: "bg-red-400",
     },
   ];
