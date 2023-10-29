@@ -19,7 +19,7 @@ export default function SideBar() {
   return (
     <>
       {dataProfile && (
-        <div className="parent-side sidebar  z-50">
+        <div className="parent-side sidebar relative z-50 ">
           <aside
             className={
               "side-bar h-full bg-slate-100 w-48 fixed top-0 left-0  shadow-md rounded-md " +
@@ -38,7 +38,7 @@ export default function SideBar() {
                 <FontAwesomeIcon icon="fa-solid fa-lock-open" />
               )}
             </button>
-            <ul className="flex justify-center items-left flex-col pl-0 content-center ">
+            <ul className="flex justify-center items-left flex-col pl-0 content-center z-50">
               <li className="w-full ml-16 mt-3 mb-2">
                 <Link to="/profile" className=" no-underline w-fit ">
                   <div className="h-14 w-14  rounded-full  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-slate-400 text-3xl shadow-sm">
