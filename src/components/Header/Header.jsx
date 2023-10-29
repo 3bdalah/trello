@@ -8,6 +8,7 @@ export default function Header() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.userRed.user);
   const dispatch = useDispatch();
+  const [openDropMenu, setOpenDropMenu] = useState(false);
   const [dataProfile, setDataProfile] = useState({});
   const { token, setToken } = useContext(TokenContext);
   useEffect(() => {
@@ -25,6 +26,9 @@ export default function Header() {
     navigate("/about");
   };
 
+  const handleToggleMenu = () => {
+    setOpenDropMenu(!openDropMenu);
+  };
   return (
     <>
       {token && (
@@ -47,14 +51,6 @@ export default function Header() {
                   My tasks
                 </Link>
               </span>
-              <span>
-                <Link
-                  onClick={handleLogout} // Invoke the handleLogout function properly
-                  className="ml-4 text-gray-400 capitalize no-underline font-semibold font-sans "
-                >
-                  log out
-                </Link>
-              </span>
             </div>
             <div className="flex flex-row justify-center content-center items-center">
               <span className="mr-6">
@@ -66,16 +62,73 @@ export default function Header() {
                 </Link>
               </span>
               <span>
-                <Link
-                  to="/profile"
-                  className=" capitalize no-underline w-12 h-12"
-                >
-                  <div className="h-10 w-10 rounded-md  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
+                <div className=" capitalize no-underline w-12 h-12 mt-2 relative z-50">
+                  {openDropMenu && (
+                    <div className="dropmenu absolute top-12 right-1 w-80  h-fit border-1 border-gray-200 shadow-md rounded-sm font-mono bg-slate-50">
+                      <div className="group-head-menu flex items-center content-center  bg-slate-100 ">
+                        <div className="m-2 h-10 w-10 rounded-md  bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
+                          {dataProfile && dataProfile.userName
+                            ? dataProfile.userName.substring(0, 1)
+                            : ""}
+                        </div>
+                        <p className="flex flex-col text-sm  mt-3 text-gray-500">
+                          <span>{dataProfile && dataProfile.userName}</span>
+
+                          <span className=" first-letter:capitalize lowercase">
+                            {dataProfile && dataProfile.email}
+                          </span>
+                        </p>
+                      </div>
+                      <ul className="list mt-3  ml-0 pl-0 duration-300 transition cursor-pointer font-mono">
+                        <li className="text-gray-500  hover:bg-slate-100">
+                          <Link
+                            to="/profile"
+                            onClick={() => handleToggleMenu()} // Invoke the handleLogout function properly
+                            className="block text-gray-500  transition duration-300 capitalize no-underline font-semibold py-2 px-4 "
+                          >
+                            <i className="fa fa-user"></i> view profile
+                          </Link>
+                        </li>
+                        <li className="text-gray-500 hover:bg-slate-100  ">
+                          <Link
+                            to="/profile"
+                            onClick={() => handleToggleMenu()}
+                            // Invoke the handleLogout function properly
+                            className="block text-gray-500 capitalize no-underline font-semibold py-2 p-4"
+                          >
+                            <i className="fa fa-lock"></i> Change prassword
+                          </Link>
+                        </li>
+                        <li className="text-gray-500 hover:bg-slate-100">
+                          <Link
+                            onClick={handleLogout} // Invoke the handleLogout function properly
+                            className="block text-gray-500 capitalize no-underline font-semibold py-2 px-4"
+                          >
+                            <i className="fa fa-arrow-left mr-2"></i>Log out
+                          </Link>
+                        </li>
+                      </ul>
+                      <hr></hr>
+                      <ul className="list ">
+                        <li className="text-gray-500 mb-2">
+                          <i className="fa fa-share-from-square"></i> Invite
+                          Friend
+                        </li>
+                        <li className="text-gray-500 mb-2">
+                          <i className="fa fa-comments"></i> Send FeedBack
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                  <div
+                    onClick={() => handleToggleMenu()}
+                    className=" cursor-pointer h-10 w-10 rounded-md  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white "
+                  >
                     {dataProfile && dataProfile.userName
                       ? dataProfile.userName.substring(0, 1)
                       : ""}
                   </div>
-                </Link>
+                </div>
               </span>
             </div>
           </div>
