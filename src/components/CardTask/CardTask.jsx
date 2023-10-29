@@ -124,7 +124,7 @@ export default function CardTask({
   return (
     <>
       {open && (
-        <div className="w-screen h-screen bg-blue-200  z-40 fixed top-0 left-0 flex content-center justify-center items-center">
+        <div className="w-screen h-screen bg-blue-200  z-10 fixed top-0 left-0 flex content-center justify-center items-center">
           {/* <div className="w-screen h-screen bg-gray-600 opacity-5 "></div> */}
           <div className="flex justify-center content-center z-30 w-3/4 opacity-100 bg-slate-100  px-10  h-3/4 border-t-8 border-blue-800  rounded-md fixed top-10">
             <form onSubmit={formik.handleSubmit}>
