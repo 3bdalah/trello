@@ -159,6 +159,7 @@ export default function CardTask({
     if (data.message === "comment deleted successfully: ") {
       notifySuccess("comment deleted successfully");
       getAllCreatedTasks();
+      handleToggleComments();
     }
     // console.log("data removee comment", data);
   };
@@ -184,19 +185,19 @@ export default function CardTask({
   return (
     <>
       {open && (
-        <div className="w-screen h-screen bg-blue-200  z-10 fixed top-0 left-0 flex content-center justify-center items-center">
+        <div className="w-screen h-screen bg-gray-900 bg-opacity-40  z-10 fixed top-0 left-0 flex content-center justify-center items-center">
           {/* <div className="w-screen h-screen bg-gray-600 opacity-5 "></div> */}
-          <div className="flex justify-center content-center z-30 w-3/4 opacity-100 bg-slate-100  px-10  h-3/4 border-t-8 border-blue-800  rounded-md fixed top-10">
+          <div className="flex justify-center content-center z-30 w-2/4 opacity-100 bg-slate-50  px-10  h-3/4 border-t-8 border-blue-500  rounded-md fixed top-10">
             <form onSubmit={formik.handleSubmit}>
               <div className="flex flex-col items-start  mt-4">
                 <label
                   htmlFor="title"
-                  className="text-gray-500 capitalize mb-2"
+                  className="text-gray-500  lowercase mb-2 first-letter:capitalize"
                 >
-                  title Task:
+                  title task:
                 </label>
                 <input
-                  className="bg-white p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-700 capitalize"
+                  className="bg-white  p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-500 text-sm capitalize"
                   type="text"
                   name="title"
                   onChange={formik.handleChange}
@@ -210,16 +211,16 @@ export default function CardTask({
                   ""
                 )}
               </div>
-              <div className="flex flex-col items-start mt-4">
+              <div className="flex flex-col items-start mt-2">
                 <label
                   htmlFor="title"
-                  className="text-gray-500 capitalize mb-2"
+                  className="text-gray-500 lowercase mb-2 first-letter:capitalize"
                 >
                   description task:
                 </label>
 
                 <textarea
-                  className="bg-white p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-700 capitalize"
+                  className="bg-white p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-500  first-letter:capitalize"
                   type="textarea"
                   name="description"
                   onChange={formik.handleChange}
@@ -233,7 +234,7 @@ export default function CardTask({
                   ""
                 )}
               </div>
-              <div className="flex flex-col items-start mt-4">
+              <div className="flex flex-col items-start mt-2">
                 <label
                   htmlFor="deadline"
                   className="text-gray-500 capitalize mb-2"
@@ -241,7 +242,7 @@ export default function CardTask({
                   Deadline
                 </label>
                 <input
-                  className="bg-white p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-700 capitalize"
+                  className="bg-white p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-500 capitalize"
                   type="date"
                   name="deadline"
                   // defaultValue={moment(task.deadline).format("YYYY-MM-DD")}
@@ -259,7 +260,12 @@ export default function CardTask({
                 )}
               </div>
               <div className="flex flex-col items-start mt-4">
-                <label htmlFor="assignedTo">Assigned To</label>
+                <label
+                  htmlFor="assignedTo"
+                  className="text-gray-500 first-letter:capitalize lowercase"
+                >
+                  Assigned To
+                </label>
                 <select
                   name="assignedTo"
                   defaultValue={
@@ -268,7 +274,7 @@ export default function CardTask({
                       : ""
                   }
                   onChange={formik.handleChange}
-                  className="bg-white p-2 w-96 opacity-100"
+                  className="bg-white p-2 w-96 opacity-100 text-gray-500"
                 >
                   {task.assignedTo ? (
                     <option value={task.assignedTo._id}>
@@ -303,9 +309,9 @@ export default function CardTask({
                 </button>
                 <button
                   onClick={() => handleTogglePop(!open)}
-                  className="w-44 h-10 bg-red-700 text-white  rounded-md "
+                  className="w-8 shadow-md   m-2 h-8 bg-red-400 transition duration-200 hover:bg-red-600 text-white  rounded-md  absolute top-0 right-0"
                 >
-                  close{" "}
+                  <i className="fa fa-close"></i>
                 </button>
               </div>
             </form>
@@ -331,12 +337,12 @@ export default function CardTask({
                   return (
                     <li
                       key={index}
-                      className="border-1 border-gray-300 rounded-md my-2 p-1 px-2"
+                      className="bg-slate-100 border-1 border-gray-300 rounded-md my-2 p-1 px-2"
                     >
-                      <span className="text-gray-700 font-mono capitalize block">
+                      <span className="text-gray-700 font-mono capitalize block m-0 font-semibold">
                         from: {comment.creatorID.userName}
                       </span>
-                      {comment.text}
+                      <span className="text-gray-500 m-0"> {comment.text}</span>
                       <span
                         className="float-right text-red-700 cursor-pointer mx-2 "
                         onClick={() => removeComment(comment._id)}
@@ -369,7 +375,7 @@ export default function CardTask({
                     )}
                     <button
                       type="submit"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                      className="transition font-semibold font-mono  duration-300  bg-blue-500 hover:bg-blue-700 text-white hover:shadow-md py-2 px-4 rounded mt-2"
                     >
                       Comment
                     </button>{" "}
