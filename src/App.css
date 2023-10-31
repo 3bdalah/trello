@@ -1,7 +1,10 @@
 .active{
   background-color: white;
   color:rgb(50, 50, 255);
-  border-left: 5px solid rgb(50, 50, 255);
+  /* border-left: 5px solid rgb(95, 95, 252); */
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  border:1px solid #efefef
 }
 
 .sidebar {

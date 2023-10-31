@@ -139,10 +139,11 @@ export default function CardTask({
         }
       );
       if (data.message === "comment added successfully") {
-        notifySuccess("comment added successfully");
+        // notifySuccess();
+        toast.success("comment added successfully");
         getAllCreatedTasks();
-        // handleToggleComments();
-        setOpenComments(false);
+        handleToggleComments();
+        // setOpenComments(false);
       }
 
       console.log("data response comment", data);

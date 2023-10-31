@@ -22,7 +22,7 @@ export default function SideBar() {
         <div className="parent-side sidebar relative z-50 ">
           <aside
             className={
-              "side-bar h-full bg-slate-100 w-48 fixed top-0 left-0  shadow-md rounded-md " +
+              "side-bar h-full bg-fbdfc  p-2 w-48 fixed top-0 left-0  shadow-md rounded-md " +
               (toggle ? "open" : "close")
             }
           >
@@ -62,12 +62,12 @@ export default function SideBar() {
                 return (
                   <li
                     key={index}
-                    className="h-9   w-full bg-slate-100   flex no-underline content-center items-center "
+                    className="h-9   w-full bg-fbdfc flex no-underline rounded-md overflow-hidden content-center items-center "
                   >
                     <NavLink
                       activeclassname="active"
                       to={link.to}
-                      className="no-underline h-full w-full leading-8 relative flex text-gray-600"
+                      className="no-underline h-full w-full   leading-8 relative flex text-gray-600"
                     >
                       <span className="mx-3 ">{link.icone}</span>
                       <span className=" capitalize"> {link.text}</span>
@@ -76,7 +76,7 @@ export default function SideBar() {
                 );
               })}
 
-              <span className=" bg-zinc-50 w-2/3 m-auto h-0.5 mb-1 mt-1"></span>
+              <span className=" bg-fbdfc w-2/3 m-auto h-0.5 mb-1 mt-1"></span>
 
               <h6 className="font-mono text-gray-600 text-base ml-5 font-bold mb-0">
                 Manage{" "}
@@ -85,7 +85,7 @@ export default function SideBar() {
                 return (
                   <li
                     key={index}
-                    className="h-9   w-full bg-slate-100   flex no-underline content-center items-center "
+                    className="h-9   w-full bg-fbdfc  flex no-underline content-center items-center "
                   >
                     <NavLink
                       activeclassname="active"
