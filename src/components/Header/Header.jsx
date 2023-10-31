@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <>
       {token && (
-        <nav className=" bg-slate-100 font-semibold font-sans   h-14 w-full  flex flex-row z-1 border-1 mb-0 border-gray-200 ">
+        <nav className=" bg-slate-50 font-semibold font-sans   h-14 w-full  flex flex-row z-1 border-1 mb-0 border-gray-200 ">
           <div className="container flex justify-between content-center items-center ">
             <div className="flex flex-row items-start justify-center">
               <span className="mx-4">
