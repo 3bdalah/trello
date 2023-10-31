@@ -4,11 +4,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import moment from "moment/moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDrag } from "react-dnd";
-import { TokenContext } from "../../Context/UserContext";
 import toast, { Toaster } from "react-hot-toast";
-import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 export default function CardTask({
   task,
@@ -18,10 +16,11 @@ export default function CardTask({
 }) {
   const location = useLocation();
   console.log("location", location.pathname);
-  const { token } = useContext(TokenContext);
   const [open, setOpen] = useState(false);
   const [employees, setEmployees] = useState([]);
-
+  const [openComments, setOpenComments] = useState(false);
+  // const [comments, setComments] = useState([]);
+  // setComments(task.comments);
   const notifySuccess = (message) => {
     toast.success(message);
   };
@@ -37,7 +36,7 @@ export default function CardTask({
   }));
   const handleEditeTask = async (values) => {
     try {
-      let { data } = await axios.put(
+      await axios.put(
         "https://trello-backend-tlg1.onrender.com/updatetask",
         { id: task._id, ...values },
         {
@@ -48,11 +47,9 @@ export default function CardTask({
       );
       notifySuccess(`Task Successed edit`);
       setOpen(!open);
-      console.log("respone to update task ", data);
       getAllCreatedTasks();
     } catch (error) {
       console.log("error to update", error);
-      console.log("token", token);
     }
   };
 
@@ -89,6 +86,10 @@ export default function CardTask({
       console.log("errors get all users", error);
     }
   };
+
+  const handleToggleComments = () => {
+    setOpenComments(!openComments);
+  };
   const validationSchema = Yup.object({
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
@@ -104,6 +105,7 @@ export default function CardTask({
       .required("Deadline is required and should be a valid date"),
   });
 
+  console.log("tasks comments", task);
   let formik = useFormik({
     initialValues: {
       title: task.title,
@@ -121,6 +123,64 @@ export default function CardTask({
   useEffect(() => {
     handleGetAllEmployee();
   }, []);
+
+  {
+    task.comments.length >= 2 ? console.log("body comment", task.comments) : "";
+  }
+  const handleSendComment = async (values) => {
+    try {
+      let { data } = await axios.post(
+        "https://trello-backend-tlg1.onrender.com/addTaskComments",
+        values,
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (data.message === "comment added successfully") {
+        notifySuccess("comment added successfully");
+        getAllCreatedTasks();
+        // handleToggleComments();
+        setOpenComments(false);
+      }
+
+      console.log("data response comment", data);
+    } catch (error) {
+      console.error("Error sending comment:", error);
+    }
+  };
+
+  const removeComment = async (id) => {
+    let { data } = await axios.delete(
+      `https://trello-backend-tlg1.onrender.com/deleteTaskComments/${id}`,
+      { headers: { token: localStorage.getItem("token") } }
+    );
+    if (data.message === "comment deleted successfully: ") {
+      notifySuccess("comment deleted successfully");
+      getAllCreatedTasks();
+    }
+    // console.log("data removee comment", data);
+  };
+  const validationCommentSchema = Yup.object({
+    taskID: Yup.string(),
+    text: Yup.string().required("Please provide text to comment"),
+  });
+
+  let formikComment = useFormik({
+    initialValues: {
+      taskID: task._id,
+      text: "",
+    },
+    validationSchema: validationCommentSchema, // Fixed the name of the validation schema
+    onSubmit: (values, { resetForm }) => {
+      handleSendComment(values);
+      resetForm();
+    },
+  });
+  // useEffect(() => {
+  //   setOpenComments(!openComments);
+  // }, [openComments]);
   return (
     <>
       {open && (
@@ -252,11 +312,78 @@ export default function CardTask({
           </div>
         </div>
       )}
+
       <Toaster />
+      {openComments && (
+        <div className="w-screen fixed min-h-screen  p-0 m-0 top-0 left-0 rounded-md shadow-sm  z-30">
+          <div className="bg-black opacity-25 w-full m-0 h-full absolute top-0 left-0 z-40"></div>
+          <div className="flex justify-center content-center items-center mt-4">
+            <div className=" bg-slate-200 p-10  relative list-comments min-h-96 w-96 mt-2 m-0 border-0 border-gray-500 z-50 rounded-md">
+              <button
+                className="text-center absolute top-2 right-2 bg-slate-100 shadow-sm w-8 h-8 flex content-center justify-center items-center rounded-full"
+                onClick={handleToggleComments}
+              >
+                <i className="fa fa-close "></i>
+              </button>
+              <ul className=" list-none text-black ">
+                {/* <li className="text-gray-600 ">comment one </li> */}
+                {task.comments.map((comment, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="border-1 border-gray-300 rounded-md my-2 p-1 px-2"
+                    >
+                      <span className="text-gray-700 font-mono capitalize block">
+                        from: {comment.creatorID.userName}
+                      </span>
+                      {comment.text}
+                      <span
+                        className="float-right text-red-700 cursor-pointer mx-2 "
+                        onClick={() => removeComment(comment._id)}
+                      >
+                        <i className="fa fa-trash"></i>{" "}
+                      </span>
+                    </li>
+                  );
+                })}
+                {/* <li className="text-gray-100 border-1 border-white rounded-md "></li> */}
+                <form onSubmit={formikComment.handleSubmit}>
+                  <div className="w-full">
+                    <label className="text-gray-600 text-sm mt-4 first-letter:capitalize">
+                      write comment :
+                    </label>
+                    <input
+                      type="text"
+                      name="text"
+                      onChange={formikComment.handleChange}
+                      value={formikComment.values.text} // Changed to specify the 'text' field of formikComment.values
+                      placeholder="Write your comment" // Corrected placeholder text
+                      className="bg-gray-200 border-1 mt-2 border-gray-300 p-2 rounded-md w-full" // Added a basic border and padding for visual clarity
+                    />
+                    {formikComment.errors.text && formikComment.touched.text ? (
+                      <div className="alert alert-danger">
+                        {formikComment.errors.text}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    <button
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                    >
+                      Comment
+                    </button>{" "}
+                  </div>
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
       <div
         ref={drag}
         // onClick={handleTogglePop}
-        className="z-1 card-task bg-slate-50 m-2 rounded-md px-0 py-0 border-1 border-solid hover:shadow-md transition duration-300 ease-linear cursor-pointer relative border-gray-200"
+        className="  z-1 card-task bg-slate-50 m-2 rounded-md px-0 py-0 border-1 border-solid hover:shadow-md transition duration-300 ease-linear  border-gray-200"
         key={task._id}
       >
         {location.pathname === "/created-tasks" ? (
@@ -276,8 +403,14 @@ export default function CardTask({
         <p className="text-gray-500 font-meduim first-letter:capitalize ml-2">
           {task.description}
         </p>
-        <p className=" text-gray-400 ml-2 mb-0 ">
-          <i className="fa fa-clock"></i> {formattedDeadline}
+        <p className=" text-gray-400 ml-2 mb-0 flex flex-row items-center  ">
+          <i className="fa fa-clock mr-2"></i> {formattedDeadline}
+          <p
+            onClick={() => handleToggleComments()}
+            className="my-0 mx-2 text-gray-500 cursor-pointer"
+          >
+            <i className="fa fa-comments"></i> {task.comments.length}
+          </p>
         </p>
         <div className="w-full flex items-center justify-center content-center mb-2 ">
           {location.pathname === "/created-tasks" ? (

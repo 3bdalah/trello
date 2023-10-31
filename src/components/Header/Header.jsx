@@ -62,7 +62,7 @@ export default function Header() {
                 </Link>
               </span>
               <span>
-                <div className=" capitalize no-underline w-12 h-12 mt-2 relative z-50">
+                <div className=" capitalize no-underline w-12 h-12 mt-2 relative z-10">
                   {openDropMenu && (
                     <div className="dropmenu absolute top-12 right-1 w-80  h-fit border-1 border-gray-200 shadow-md rounded-sm font-mono bg-slate-50">
                       <div className="group-head-menu flex items-center content-center  bg-slate-100 ">
