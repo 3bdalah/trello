@@ -51,6 +51,15 @@ export default function Login() {
       console.log("error", error);
     }
   };
+
+  const guestUser = {
+    email: "gemy@gmail.com",
+    password: "Gemy123",
+  };
+
+  const handleGuestUser = () => {
+    handleLogin(guestUser);
+  };
   const handleGoogleLogin = async () => {
     setLoading(true);
     let valuesUser = {
@@ -176,6 +185,12 @@ export default function Login() {
                 className="text-center w-full no-underline hover:shadow-md transition duration-200 ease-linear my-2 bg-gray-500 hover:bg-gray-800 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Sign Up
+              </Link>
+              <Link
+                onClick={handleGuestUser}
+                className="text-center w-full no-underline hover:shadow-md transition duration-200 ease-linear my-2 bg-slate-800 hover:bg-gray-900 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Try as a Guest
               </Link>
             </div>
             <div className="flex items-center justify-center flex-col lowercase">
