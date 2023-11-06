@@ -28,6 +28,8 @@ You can add tasks and assign them to other users, as well as edit, remove, or dr
 
 ### Project Structure
 
+```ReactJS
+
 .../trello
 .
 | App.css
@@ -61,6 +63,9 @@ You can add tasks and assign them to other users, as well as edit, remove, or dr
 \---Utils
 Consts.jsx
 
+```
+
+---
 ### Components
 
 List of all components in the project:
