@@ -4,6 +4,7 @@ import { getAllMyTasksCreated, getAllMyTasks } from "../../Redux/TasksSlice";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FilterDashboard from "../FilterDashboard/FilterDashboard";
 export default function Dashboard() {
   let { allEmployees, counterEmployees } = useSelector(
     (state) => state.employeesRed
@@ -36,7 +37,7 @@ export default function Dashboard() {
     { text: "all employees ", num: counterEmployees, color: "bg-green-300" },
     {
       text: "all tasks",
-       num: myTasksAssignMe && myTasksAssignMe.length + createdTasksLength,
+      num: myTasksAssignMe && myTasksAssignMe.length + createdTasksLength,
       color: "bg-red-400",
     },
   ];
@@ -61,6 +62,12 @@ export default function Dashboard() {
               );
             })}
           </div>
+          <section className="mt-6">
+            <h3 className="text-gray-700  font-mono font-medium">
+              Filter Tasks
+            </h3>
+            <FilterDashboard />
+          </section>
           {/* all tasks assignd to me  */}
           <section className="section mt-5">
             <h2> History All tasks Assigned to me </h2>
