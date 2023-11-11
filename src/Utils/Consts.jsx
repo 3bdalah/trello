@@ -117,6 +117,9 @@ export const calculateTimeRemaining = (deadline) => {
   const days = Math.floor(duration.asDays());
   const hours = duration.hours();
   const minutes = duration.minutes();
+  if (duration.asSeconds() <= 0) {
+    return "Time has elapsed";
+  }
 
   return `${days} days, ${hours} hours, ${minutes} minutes`;
 };
