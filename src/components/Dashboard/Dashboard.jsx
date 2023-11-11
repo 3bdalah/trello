@@ -2,27 +2,41 @@ import { calculateTimeRemaining } from "../../Utils/Consts";
 import { handleGetAllEmployee } from "../../Redux/EmployeesSlice";
 import { getAllMyTasksCreated, getAllMyTasks } from "../../Redux/TasksSlice";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FilterDashboard from "../FilterDashboard/FilterDashboard";
 export default function Dashboard() {
-  let { allEmployees, counterEmployees } = useSelector(
-    (state) => state.employeesRed
-  );
+  const [tasksDone, setTasksDone] = useState([]);
+  const [tasksDoing, setTasksDoing] = useState([]);
+  const [tasksTodo, setTasksTodo] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("all");
   let myTasksAssignMe = useSelector(
     (state) => state.tasksRed.tasksAssignedMe.allTasksAssignedToUser
   );
+  useEffect(() => {
+    const doneTask = myTasksAssignMe
+      ? myTasksAssignMe.filter((task) => task.status === "done")
+      : [];
+    const todoTask = myTasksAssignMe
+      ? myTasksAssignMe.filter((task) => task.status === "toDo")
+      : [];
+    const doingTask = myTasksAssignMe
+      ? myTasksAssignMe.filter((task) => task.status === "doing")
+      : [];
+    setTasksDone(doneTask);
+    setTasksTodo(todoTask);
+    setTasksDoing(doingTask);
+  }, [myTasksAssignMe]);
+
   let createdTasksLength = useSelector(
     (state) => state.tasksRed.createdTasksLength
   );
-
-  console.log("data from employees redux ", allEmployees);
-  console.log("data from employees redux myTasksAssignMe", myTasksAssignMe);
-  console.log(
-    "data from counter tasks createdTasksLength ",
-    createdTasksLength,
-    "assignendTasksLength"
-  );
+  const filteredTasks = myTasksAssignMe
+    ? myTasksAssignMe.filter((task) => {
+        // Apply filter based on status
+        return statusFilter === "all" || task.status === statusFilter;
+      })
+    : [];
 
   const dispatch = useDispatch();
 
@@ -32,16 +46,15 @@ export default function Dashboard() {
     dispatch(getAllMyTasksCreated());
   }, [dispatch]);
   const tasksData = [
-    { text: "tasks done", num: counterEmployees, color: "bg-blue-300" },
-    { text: "tasks doing", num: 0, color: "bg-yellow-300" },
-    { text: "all employees ", num: counterEmployees, color: "bg-green-300" },
+    { text: "tasks Doing", num: tasksDoing.length, color: "bg-blue-300" },
+    { text: "tasks Todo", num: tasksTodo.length, color: "bg-yellow-300" },
+    { text: "tasks Done ", num: tasksDone.length, color: "bg-green-300" },
     {
       text: "all tasks",
       num: myTasksAssignMe && myTasksAssignMe.length + createdTasksLength,
       color: "bg-red-400",
     },
   ];
-
   return (
     <>
       <div className=" min-h-screen  bg-white p-3 mt-10">
@@ -66,7 +79,7 @@ export default function Dashboard() {
             <h3 className="text-gray-700  font-mono font-medium">
               Filter Tasks
             </h3>
-            <FilterDashboard />
+            <FilterDashboard setStatusFilter={setStatusFilter} />
           </section>
           {/* all tasks assignd to me  */}
           <section className="section mt-5">
@@ -91,8 +104,8 @@ export default function Dashboard() {
                 defaculty Task
               </span>
             </div>
-            {myTasksAssignMe &&
-              myTasksAssignMe.map((task, index) => {
+            {filteredTasks &&
+              filteredTasks.map((task, index) => {
                 return (
                   <div
                     key={index}
