@@ -18,7 +18,7 @@ import AboutHeader from "./components/About-header/About-header";
 import Settings from "./components/Settings/Settings";
 import Chat from "./components/Chat/Chat";
 import Dashboard from "./components/Dashboard/Dashboard";
-
+import Accordion from "./components/Accordion/Accordion";
 function App() {
   const routes = createBrowserRouter([
     {
@@ -106,6 +106,15 @@ function App() {
           element: (
             <ProtectedRoutes>
               <TasksList />
+            </ProtectedRoutes>
+          ),
+        },
+
+        {
+          path: "/help",
+          element: (
+            <ProtectedRoutes>
+              <Accordion />
             </ProtectedRoutes>
           ),
         },
