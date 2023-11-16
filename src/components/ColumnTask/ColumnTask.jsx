@@ -5,12 +5,8 @@ import { formatDate } from "../../Utils/Consts";
 import CardTask from "../CardTask/CardTask";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 function ColumnTask({ tasks, status, updateTasks, getAllCreatedTasks }) {
   const filteredTasks = tasks.filter((task) => task.status === status);
-  const notifySuccess = (message) => {
-    toast.success(message);
-  };
 
   // eslint-disable-next-line no-unused-vars
   const [{ isOver }, drop] = useDrop(() => ({
@@ -34,7 +30,7 @@ function ColumnTask({ tasks, status, updateTasks, getAllCreatedTasks }) {
           },
         }
       );
-      notifySuccess(`Moved to ${status}`);
+
       console.log("respone to update task ", data);
       updateTasks(id, status);
     } catch (error) {
@@ -48,7 +44,6 @@ function ColumnTask({ tasks, status, updateTasks, getAllCreatedTasks }) {
         ref={drop}
         className=" bg-slate-50 p-2 border-1 border-gray-300 w-1/4 m-2 border-dashed rounded-sm h-44"
       >
-        <Toaster />
         <div className="head-col flex justify-between items-center content-center">
           <h3 className="m-2 font-thin capitalize text-gray-600">{status}</h3>
           <span

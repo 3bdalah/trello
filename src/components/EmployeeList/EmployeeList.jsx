@@ -14,7 +14,7 @@ export default function EmployeeList() {
   console.log("all employees state ", allEmployees);
   useEffect(() => {
     dispatch(handleGetAllEmployee());
-  }, []);
+  }, [dispatch]);
   // Filter employees based on the search term
   const filteredEmployees = allEmployees.filter((employee) =>
     employee.userName.toLowerCase().includes(searchTerm.toLowerCase())

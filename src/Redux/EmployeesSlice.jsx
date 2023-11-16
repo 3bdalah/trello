@@ -23,6 +23,7 @@ export let handleGetAllEmployee = createAsyncThunk(
 let initialState = {
   allEmployees: [],
   counterEmployees: 0,
+  loaded: false,
 };
 let employeesSlice = createSlice({
   name: "employees",
@@ -32,6 +33,7 @@ let employeesSlice = createSlice({
     builder.addCase(handleGetAllEmployee.fulfilled, (state, action) => {
       state.allEmployees = action.payload;
       state.counterEmployees = state.allEmployees.length;
+      state.loaded = true;
     });
   },
 });
