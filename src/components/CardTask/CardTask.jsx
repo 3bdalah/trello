@@ -19,8 +19,7 @@ export default function CardTask({
   const [open, setOpen] = useState(false);
   const [employees, setEmployees] = useState([]);
   const [openComments, setOpenComments] = useState(false);
-  // const [comments, setComments] = useState([]);
-  // setComments(task.comments);
+
   const notifySuccess = (message) => {
     toast.success(message);
   };
@@ -36,7 +35,7 @@ export default function CardTask({
   }));
   const handleEditeTask = async (values) => {
     try {
-      await axios.put(
+      let { data } = await axios.put(
         "https://trello-backend-tlg1.onrender.com/updatetask",
         { id: task._id, ...values },
         {
@@ -45,9 +44,11 @@ export default function CardTask({
           },
         }
       );
-      notifySuccess(`Task Successed edit`);
-      setOpen(!open);
-      getAllCreatedTasks();
+      if (data.message === "Task updated successfully") {
+        toast.success(`Task Successed edit`);
+        setOpen(!open);
+        getAllCreatedTasks();
+      }
     } catch (error) {
       console.log("error to update", error);
     }
@@ -63,9 +64,10 @@ export default function CardTask({
           },
         }
       );
-      notifySuccess(`Task Removed`);
-      console.log("respone to update task ", data);
-      getAllCreatedTasks();
+      if (data.message === "Task deleted successfully") {
+        toast.success(`Task Successed Removed`);
+        getAllCreatedTasks();
+      }
     } catch (error) {
       console.log("error to remove", error);
     }
@@ -81,6 +83,7 @@ export default function CardTask({
           },
         }
       );
+      console.log("data ");
       setEmployees(data.users);
     } catch (error) {
       console.log("errors get all users", error);
