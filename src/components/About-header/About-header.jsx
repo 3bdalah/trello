@@ -11,7 +11,7 @@ export default function AboutHeader() {
         <div className="container mx-auto px-4">
           <div className="hero h-screen flex flex-col justify-center items-center">
             <div className="text-about w-full md:w-2/3 text-center md:text-left">
-              <h1 className="text-5xl md:text-9xl font-mono font-bold text-shadow-md">
+              <h1 className="text-5xl md:text-9xl font-mono font-bold text-shadow-md z-10">
                 Checklists arranged in columns
               </h1>
             </div>
