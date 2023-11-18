@@ -129,16 +129,15 @@ export default function Login() {
       <div className="flex h-screen justify-center">
         <Toaster />
         {!isLoading ? (
-          <div className="m-auto w-full max-w-xs border-t-4 border-blue-600 rounded-md p-3">
-            <h3 className="text-center capitalize font-mono text-3xl  text-stone-600 mb-5">
-              {" "}
-              Login
-            </h3>
-
+          <div className=" m-auto w-full max-w-xs border-t-4 border-blue-600 rounded-md ">
             <form
               className="bg-white shadow-md   rounded px-8 pt-6 pb-8 mb-4"
               onSubmit={formik.handleSubmit}
             >
+              <h3 className="bg-white text-center capitalize font-mono text-3xl  text-stone-600 mb-5">
+                {" "}
+                Login
+              </h3>
               <div className="flex items-start   justify-center flex-col">
                 <label
                   htmlFor="password"
